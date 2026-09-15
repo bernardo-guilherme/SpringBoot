@@ -5,7 +5,7 @@ public class User {
     private long id;
     private String name;
     private String arroba;
-    private int cpf;
+    private String cpf;
 
     public User() {
 
@@ -15,7 +15,7 @@ public class User {
         return id;
     }
 
-    public User(long id, String name, int cpf, String arroba) {
+    public User(long id, String name, String cpf, String arroba) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -34,11 +34,11 @@ public class User {
         this.name = name;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

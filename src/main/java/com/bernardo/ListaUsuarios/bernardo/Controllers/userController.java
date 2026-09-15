@@ -1,12 +1,10 @@
 package com.bernardo.ListaUsuarios.bernardo.Controllers;
 
 import com.bernardo.ListaUsuarios.bernardo.model.User;
+import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +17,8 @@ public class userController {
     @GetMapping("/index")
     public String index(ModelMap model){
         // Evita duplicar os dados toda vez que recarrega a página se a lista já tiver itens
-        if (listUser.isEmpty()) {
-            listUser.add(new User(1,"João",1671882,"@jao123"));
-            listUser.add(new User(2, "Maria", 168200,"@ma76291"));
-        }
         model.addAttribute("size", listUser.size());
-        model.addAttribute("listUsers", listUser);
+        model.addAttribute("users", listUser);
         return "users/index"; // Removida a barra inicial para seguir o padrão do Thymeleaf (opcional, mas recomendado)
     }
 
@@ -43,5 +37,32 @@ public class userController {
         listUser.add(user);
 
         return "redirect:/users/index";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editUser(@PathVariable Long id, ModelMap model){
+        int idInt = Math.toIntExact(id-1L);
+        User userEdit = listUser.get(idInt);
+        model.addAttribute("user", userEdit);
+        return "/users/edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String userUpdate(@PathVariable long id, @ModelAttribute User user, ModelMap model){
+        int idInt = Math.toIntExact(id-1L);
+        User userEdit = listUser.get(idInt);
+        userEdit.setName(user.getName());
+        userEdit.setArroba(user.getArroba());
+        userEdit.setCpf(user.getCpf());
+        model.addAttribute("user", userEdit);
+        return "redirect:/users/index";
+    }
+
+    @GetMapping("/show/{id}")
+    public String show(@PathVariable Long id, ModelMap model){
+        int intId = Math.toIntExact((id-1L));
+        User userShow = listUser.get(intId);
+        model.addAttribute("user",userShow);
+        return "/users/show";
     }
 }
