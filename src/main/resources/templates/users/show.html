@@ -40,9 +40,11 @@
                 <i class="bi bi-pencil"></i> Editar
             </a>
 
-            <button type="submit" class="btn btn-danger">
-                <i class="bi bi-trash"></i> Excluir
-            </button>
+            <form th:action="@{|/users/delete/${user.id}|}" method="post" class="m-0">
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Excluir
+                </button>
+            </form>
 
         </div>
     </div>

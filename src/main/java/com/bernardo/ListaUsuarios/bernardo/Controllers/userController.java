@@ -1,6 +1,7 @@
 package com.bernardo.ListaUsuarios.bernardo.Controllers;
 
 import com.bernardo.ListaUsuarios.bernardo.model.User;
+import org.springframework.boot.Banner;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -64,5 +65,12 @@ public class userController {
         User userShow = listUser.get(intId);
         model.addAttribute("user",userShow);
         return "/users/show";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String userDelete(@PathVariable long id, @ModelAttribute User user, ModelMap model){
+        int idInt = Math.toIntExact(id-1L);
+        listUser.remove(idInt);
+        return "redirect:/users/index";
     }
 }
