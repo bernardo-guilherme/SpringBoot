@@ -11,15 +11,15 @@ public class User {
 
     }
 
-    public long getId() {
-        return id;
-    }
-
     public User(long id, String name, String cpf, String arroba) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.arroba = arroba;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setId(long id) {

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalhes do Usuário</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons (Necessário para o ícone bi-trash) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<div class="container pt-3">
+    <a th:href="@{'/livros/index'}" class="btn btn-secondary float-end">Voltar para Lista</a>
+    <h1>Detalhes do Usuário</h1>
+    <hr>
+
+    <div class="card mt-4" style="max-width: 600px;">
+        <div class="card-header">
+            <strong>Livro #<span th:text="${livro.id}">1</span></strong>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>Titulo:</strong> <span th:text="${livro.titulo}">Mark</span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Autor:</strong> <span th:text="${livro.autor}">Otto</span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Gênero:</strong> <span th:text="${livro.genero}">000.000.000-00</span>
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer d-flex gap-2">
+            <!-- Botão de Editar -->
+            <a th:href="@{|/livros/edit/${livro.id}|}" class="btn btn-primary">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+
+            <form th:action="@{|/livros/delete/${livro.id}|}" method="post" class="m-0">
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Excluir
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
