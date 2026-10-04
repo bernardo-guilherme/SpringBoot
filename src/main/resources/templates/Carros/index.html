@@ -4,32 +4,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Usuários</title>
+    <title>Lista de Carros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 <div class="container pt-3">
-    <a th:href="@{'/livros/new'}" class="btn btn-primary float-end">Novo Usuário</a>
-    <h1>Lista Usuários (<span th:text="${size}">0</span>)</h1>
+    <a th:href="@{'/carros/new'}" class="btn btn-primary float-end">Novo Carro</a>
+    <h1>Lista Carros (<span th:text="${size}">0</span>)</h1>
     <hr>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Arroba</th>
-            <th scope="col">CPF</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Preço</th>
             <th scope="col">Ações</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="livro : ${livros}">
-            <th scope="row" th:text="${livro.getId}">1</th>
-            <td th:text="${livro.getTitulo}">Mark</td>
-            <td th:text="${livro.getAutor}">Otto</td>
-            <td th:text="${livro.getGenero}">@mdo</td>
+        <tr th:each="carro : ${carros}">
+            <th scope="row" th:text="${carro.getId}">1</th>
+            <td th:text="${carro.getMarca}">BYD</td>
+            <td th:text="${carro.getModelo}">Otto</td>
+            <td th:text="|${carro.getPreco} R$|">@mdo</td>
             <td>
-                <a  th:href="@{|/livros/show/${livro.id}|}" class="btn btn-danger">Detalhes</a>
+                <a  th:href="@{|/carros/show/${carro.id}|}" class="btn btn-danger">Detalhes</a>
             </td>
         </tr>
         </tbody>

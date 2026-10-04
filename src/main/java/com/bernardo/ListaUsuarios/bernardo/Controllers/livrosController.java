@@ -1,7 +1,6 @@
 package com.bernardo.ListaUsuarios.bernardo.Controllers;
 
 import com.bernardo.ListaUsuarios.bernardo.model.Livros;
-import com.bernardo.ListaUsuarios.bernardo.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,10 @@ import java.util.List;
 @RequestMapping("/livros")
 public class livrosController {
     List<Livros> listLivros = new ArrayList<Livros>();
+
+    // CORREÇÃO: Contador sequencial para garantir IDs únicos
+    private long nextId = 1L;
+
     @GetMapping("/index")
     public String index(ModelMap model){
         model.addAttribute("size", listLivros.size());
@@ -28,46 +31,48 @@ public class livrosController {
 
     @PostMapping("/create")
     public String livrosCreate(@ModelAttribute Livros livro){
-        Long id = listLivros.size()+1L;
-        livro.setId(id);
-
+        // CORREÇÃO: Atribui o próximo ID único
+        livro.setId(nextId++);
         listLivros.add(livro);
-
         return "redirect:/livros/index";
     }
 
     @GetMapping("/edit/{id}")
     public String editLivros(@PathVariable Long id, ModelMap model){
-        int idInt = Math.toIntExact(id - 1L);
-        Livros livrosEdit = listLivros.get(idInt);
+        Livros livrosEdit = findById(id);
         model.addAttribute("livro", livrosEdit);
         return "livros/edit";
     }
 
     @PostMapping("/update/{id}")
     public String livrosUpdate(@PathVariable Long id, @ModelAttribute Livros livro, ModelMap model){
-        int idInt = Math.toIntExact(id - 1L);
-        Livros livrosEdit = listLivros.get(idInt);
-        livrosEdit.setId(livro.getId());
-        livrosEdit.setTitulo(livro.getTitulo());
-        livrosEdit.setAutor(livro.getAutor());
-        livrosEdit.setGenero(livro.getGenero());
+        Livros livrosEdit = findById(id);
+        if (livrosEdit != null) {
+            livrosEdit.setTitulo(livro.getTitulo());
+            livrosEdit.setAutor(livro.getAutor());
+            livrosEdit.setGenero(livro.getGenero());
+        }
         model.addAttribute("livro", livrosEdit);
         return "redirect:/livros/index";
     }
 
     @GetMapping("/show/{id}")
     public String livrosShow(@PathVariable long id, ModelMap model){
-        int idInt = Math.toIntExact(id - 1L);
-        Livros livrosShow = listLivros.get(idInt);
+        Livros livrosShow = findById(id);
         model.addAttribute("livro", livrosShow);
         return "livros/show";
     }
 
     @PostMapping("/delete/{id}")
     public String livroDelete(@PathVariable long id, @ModelAttribute Livros livro, ModelMap model){
-        int intId = Math.toIntExact(id-1L);
-        listLivros.remove(intId);
+        listLivros.removeIf(l -> l.getId() != null && l.getId() == id);
         return "redirect:/livros/index";
+    }
+
+    private Livros findById(Long id) {
+        return listLivros.stream()
+                .filter(l -> l.getId() != null && l.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 }
