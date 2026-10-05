@@ -13,7 +13,6 @@ import java.util.List;
 public class userController {
     List<User> listUser = new ArrayList<User>();
 
-    // CORREÇÃO: Contador sequencial de ID para evitar duplicatas após deleções
     private long nextId = 1L;
 
     @GetMapping("/index")
@@ -31,7 +30,6 @@ public class userController {
 
     @PostMapping("/create")
     public String userCreate(@ModelAttribute User user){
-        // CORREÇÃO: Atribui o próximo ID único e incrementa o contador
         user.setId(nextId++);
         listUser.add(user);
         return "redirect:/users/index";

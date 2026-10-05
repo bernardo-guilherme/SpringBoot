@@ -13,7 +13,6 @@ import java.util.List;
 public class livrosController {
     List<Livros> listLivros = new ArrayList<Livros>();
 
-    // CORREÇÃO: Contador sequencial para garantir IDs únicos
     private long nextId = 1L;
 
     @GetMapping("/index")
@@ -31,7 +30,6 @@ public class livrosController {
 
     @PostMapping("/create")
     public String livrosCreate(@ModelAttribute Livros livro){
-        // CORREÇÃO: Atribui o próximo ID único
         livro.setId(nextId++);
         listLivros.add(livro);
         return "redirect:/livros/index";
