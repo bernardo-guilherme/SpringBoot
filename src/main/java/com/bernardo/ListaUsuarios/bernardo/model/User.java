@@ -1,52 +1,31 @@
 package com.bernardo.ListaUsuarios.bernardo.model;
 
-public class User {
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.javalite.activejdbc.Model;
 
-    private long id;
-    private String name;
-    private String arroba;
-    private String cpf;
-
-    public User() {
-
-    }
-
-    public User(long id, String name, String cpf, String arroba) {
-        this.id = id;
-        this.name = name;
-        this.cpf = cpf;
-        this.arroba = arroba;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+public class User extends Model {
 
     public String getName() {
-        return name;
+        return getString("name");
     }
 
     public void setName(String name) {
-        this.name = name;
+        set("name", name);
     }
 
     public String getCpf() {
-        return cpf;
+        return getString("cpf");
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        set("cpf", cpf);
     }
 
     public String getArroba() {
-        return arroba;
+        return getString("arroba");
     }
 
     public void setArroba(String arroba) {
-        this.arroba = arroba;
+        set("arroba", arroba);
     }
 }

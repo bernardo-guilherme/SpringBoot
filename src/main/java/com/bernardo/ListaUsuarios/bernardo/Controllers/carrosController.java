@@ -11,14 +11,14 @@ import java.util.List;
 @Controller
 @RequestMapping("/carros")
 public class carrosController {
-    List<Carros> listCarros = new ArrayList<Carros>();
+    List<Carros> listCarro = new ArrayList<Carros>();
     
     private long nextId = 1L;
 
     @GetMapping("/index")
     public String index(ModelMap model){
-        model.addAttribute("size", listCarros.size());
-        model.addAttribute("carros", listCarros);
+        model.addAttribute("size", listCarro.size());
+        model.addAttribute("carros", listCarro);
         return "carros/index";
     }
 
@@ -31,7 +31,7 @@ public class carrosController {
     @PostMapping("/create")
     public String carrosCreate(@ModelAttribute Carros carro){
         carro.setId(nextId++);
-        listCarros.add(carro);
+        listCarro.add(carro);
         return "redirect:/carros/index";
     }
 
@@ -63,12 +63,12 @@ public class carrosController {
 
     @PostMapping("/delete/{id}")
     public String carroDelete(@PathVariable long id, @ModelAttribute Carros carro, ModelMap model){
-        listCarros.removeIf(l -> l.getId() != null && l.getId() == id);
+        listCarro.removeIf(l -> l.getId() != null && l.getId() == id);
         return "redirect:/carros/index";
     }
 
     private Carros findById(Long id) {
-        return listCarros.stream()
+        return listCarro.stream()
                 .filter(l -> l.getId() != null && l.getId().equals(id))
                 .findFirst()
                 .orElse(null);
