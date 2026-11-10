@@ -17,9 +17,9 @@ public class DataInitializer implements CommandLineRunner {
             // 2. Garante que a tabela existe
             String sqlCreate = "CREATE TABLE IF NOT EXISTS users (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "first_name VARCHAR(56), " +
-                    "last_name VARCHAR(56), " +
-                    "email VARCHAR(100))";
+                    "name VARCHAR(100), " +
+                    "arroba VARCHAR(56), " +
+                    "cpf VARCHAR(14))";
             Base.exec(sqlCreate);
 
             sqlCreate = "CREATE TABLE IF NOT EXISTS books (" +

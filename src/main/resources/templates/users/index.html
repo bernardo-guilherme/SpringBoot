@@ -24,12 +24,12 @@
         </thead>
         <tbody>
         <tr th:each="user : ${users}">
-            <td style="padding: 8px;" th:text="${user.getId()}">1</td>
-            <td style="padding: 8px;" th:text="${user.getFirst_name()}">João</td>
-            <td style="padding: 8px;" th:text="${user.getLast_name()}">Silva</td>
-            <td style="padding: 8px;" th:text="${user.getEmail()}">joao@email.com</td>
+            <td style="padding: 8px;" th:text="${user.id}">1</td>
+            <td style="padding: 8px;" th:text="${user.name}">João</td>
+            <td style="padding: 8px;" th:text="${user.arroba}">@joao</td>
+            <td style="padding: 8px;" th:text="${user.cpf}">000.000.000-00</td>
             <td>
-                <a  th:href="@{|/users/show/${user.id}|}" class="btn btn-danger">Detalhes</a>
+                <a th:href="@{|/users/show/${user.id}|}" class="btn btn-primary">Detalhes</a>
             </td>
         </tr>
         </tbody>
