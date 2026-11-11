@@ -1,16 +1,16 @@
 package com.bernardo.ListaUsuarios.bernardo.model;
 
-public class Livros {
+public class Book {
     Long id;
     String titulo;
     String autor;
     String genero;
 
-    public Livros(){
+    public Book(){
 
     }
 
-    public Livros(Long id, String titulo, String autor, String genero) {
+    public Book(Long id, String titulo, String autor, String genero) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;

@@ -1,16 +1,16 @@
 package com.bernardo.ListaUsuarios.bernardo.model;
 
-public class Carros {
+public class Car {
     Long id;
     String marca;
     String modelo;
     int preco;
 
-    public Carros(){
+    public Car(){
 
     }
 
-    public Carros(Long id, String marca, String modelo, int preco) {
+    public Car(Long id, String marca, String modelo, int preco) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
