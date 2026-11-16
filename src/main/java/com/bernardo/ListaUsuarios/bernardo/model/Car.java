@@ -1,51 +1,29 @@
 package com.bernardo.ListaUsuarios.bernardo.model;
 
-public class Car {
-    Long id;
-    String marca;
-    String modelo;
-    int preco;
+import org.javalite.activejdbc.Model;
 
-    public Car(){
-
+public class Car extends Model {
+    public String getBrand() {
+        return getString("brand");
     }
 
-    public Car(Long id, String marca, String modelo, int preco) {
-        this.id = id;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.preco = preco;
+    public void setBrand(String brand) {
+        set("brand", brand);
     }
 
-    public Long getId() {
-        return id;
+    public String getModel() {
+        return getString("model");
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setModel(String model) {
+        set("model", model);
     }
 
-    public String getMarca() {
-        return marca;
+    public String getPrice() {
+        return getString("arroba");
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public int getPreco() {
-        return preco;
-    }
-
-    public void setPreco(int preco) {
-        this.preco = preco;
+    public void setPrice(String price) {
+        set("price", price);
     }
 }

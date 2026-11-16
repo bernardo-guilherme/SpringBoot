@@ -1,34 +1,35 @@
+
 <!doctype html>
 <html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Livros</title>
+    <title>Lista de Carros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 <div class="container pt-3">
-    <a th:href="@{'/livros/new'}" class="btn btn-primary float-end">Novo Livro</a>
-    <h1>Lista Livros (<span th:text="${size}">0</span>)</h1>
+    <a th:href="@{'/carros/new'}" class="btn btn-primary float-end">Novo Carro</a>
+    <h1>Lista Carros (<span th:text="${size}">0</span>)</h1>
     <hr>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Titulo</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Gênero</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Preço</th>
             <th scope="col">Ações</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="livro : ${livros}">
-            <th scope="row" th:text="${livro.getId}">1</th>
-            <td th:text="${livro.getTitulo}">Titulo Gênerico</td>
-            <td th:text="${livro.getAutor}">Autor Qualquer</td>
-            <td th:text="${livro.getGenero}">Romance</td>
+        <tr th:each="carro : ${carros}">
+            <td style="padding: 8px;" th:text="${carro.id}">1</td>
+            <td style="padding: 8px;" th:text="${carro.brand}">João</td>
+            <td style="padding: 8px;" th:text="${carro.model}">@joao</td>
+            <td style="padding: 8px;" th:text="${carro.price}">000.000.000-00</td>
             <td>
-                <a  th:href="@{|/livros/show/${livro.id}|}" class="btn btn-danger">Detalhes</a>
+                <a th:href="@{|/carros/show/${car.id}|}" class="btn btn-primary">Detalhes</a>
             </td>
         </tr>
         </tbody>

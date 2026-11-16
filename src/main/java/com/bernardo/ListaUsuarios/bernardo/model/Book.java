@@ -1,51 +1,29 @@
 package com.bernardo.ListaUsuarios.bernardo.model;
 
-public class Book {
-    Long id;
-    String titulo;
-    String autor;
-    String genero;
+import org.javalite.activejdbc.Model;
 
-    public Book(){
-
+public class Book extends Model {
+    public String getTitle() {
+        return getString("title");
     }
 
-    public Book(Long id, String titulo, String autor, String genero) {
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.genero = genero;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        set("title", title);
     }
 
     public String getAutor() {
-        return autor;
+        return getString("Autor");
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAutorl(String autor) {
+        set("autor", autor);
     }
 
-    public String getGenero() {
-        return genero;
+    public String getGenre() {
+        return getString("arroba");
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setGenre(String genre) {
+        set("genre", genre);
     }
 }

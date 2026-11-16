@@ -1,6 +1,8 @@
 package com.bernardo.ListaUsuarios.bernardo.Controllers;
 
 import com.bernardo.ListaUsuarios.bernardo.model.Book;
+import com.bernardo.ListaUsuarios.bernardo.model.Car;
+import org.javalite.activejdbc.Base;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -11,66 +13,139 @@ import java.util.List;
 @Controller
 @RequestMapping("/livros")
 public class livrosController {
-    List<Book> listLivros = new ArrayList<Book>();
-
-    private long nextId = 1L;
-
     @GetMapping("/index")
-    public String index(ModelMap model){
-        model.addAttribute("size", listLivros.size());
-        model.addAttribute("livros", listLivros);
+    public String bookIndex(ModelMap model){
+        try {
+            Base.open("org.sqlite.JDBC", "jdbc:sqlite:meu_app.db", "", "");
+
+            List<Book> books = new ArrayList<>(Book.findAll());
+            model.addAttribute("books", books);
+
+            model.addAttribute("size", Book.count());
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        } finally {
+            Base.close();
+        }
+
         return "livros/index";
     }
 
     @GetMapping("/new")
-    public String livroNew(ModelMap model){
-        model.addAttribute("livro", new Book());
+    public String bookNew(ModelMap model){
+        model.addAttribute("book", new Book());
         return "livros/new";
     }
 
     @PostMapping("/create")
-    public String livrosCreate(@ModelAttribute Book livro){
-        livro.setId(nextId++);
-        listLivros.add(livro);
+    public String bookCreate(@ModelAttribute Book book){
+        try {
+            if (!Base.hasConnection()) {
+                Base.open("org.sqlite.JDBC", "jdbc:sqlite:meu_app.db", "", "");
+            }
+
+            book.saveIt();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (Base.hasConnection()) {
+                Base.close();
+            }
+        }
+
         return "redirect:/livros/index";
     }
 
     @GetMapping("/edit/{id}")
-    public String editLivros(@PathVariable Long id, ModelMap model){
-        Book livrosEdit = findById(id);
-        model.addAttribute("livro", livrosEdit);
+    public String editBook(@PathVariable Long id, ModelMap model){
+        try {
+            if (!Base.hasConnection()) {
+                Base.open("org.sqlite.JDBC", "jdbc:sqlite:meu_app.db", "", "");
+            }
+
+            Book bookEdit = Book.findById(id);
+            model.addAttribute("book", bookEdit);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (Base.hasConnection()) {
+                Base.close();
+            }
+        }
         return "livros/edit";
     }
 
     @PostMapping("/update/{id}")
-    public String livrosUpdate(@PathVariable Long id, @ModelAttribute Book livro, ModelMap model){
-        Book livrosEdit = findById(id);
-        if (livrosEdit != null) {
-            livrosEdit.setTitulo(livro.getTitulo());
-            livrosEdit.setAutor(livro.getAutor());
-            livrosEdit.setGenero(livro.getGenero());
+    public String bookUpdate(@PathVariable long id, @ModelAttribute Book bookForm){
+        try {
+            if (!Base.hasConnection()) {
+                Base.open("org.sqlite.JDBC", "jdbc:sqlite:meu_app.db", "", "");
+            }
+
+            Book bookEdit = Book.findById(id);
+            if (bookEdit != null) {
+                bookEdit.set("brand", bookForm.get("brand"),
+                        "model", bookForm.get("model"),
+                        "price", bookForm.get("price"));
+
+                bookEdit.saveIt();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (Base.hasConnection()) {
+                Base.close();
+            }
         }
-        model.addAttribute("livro", livrosEdit);
         return "redirect:/livros/index";
     }
 
     @GetMapping("/show/{id}")
-    public String livrosShow(@PathVariable long id, ModelMap model){
-        Book livrosShow = findById(id);
-        model.addAttribute("livro", livrosShow);
+    public String bookShow(@PathVariable Long id, ModelMap model){
+        try {
+            if (!Base.hasConnection()) {
+                Base.open("org.sqlite.JDBC", "jdbc:sqlite:meu_app.db", "", "");
+            }
+
+            Book bookShow = Book.findById(id);
+            model.addAttribute("book", bookShow);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (Base.hasConnection()) {
+                Base.close();
+            }
+        }
+
         return "livros/show";
     }
 
     @PostMapping("/delete/{id}")
-    public String livroDelete(@PathVariable long id, @ModelAttribute Book livro, ModelMap model){
-        listLivros.removeIf(l -> l.getId() != null && l.getId() == id);
-        return "redirect:/livros/index";
-    }
+    public String bookDelete(@PathVariable long id){
+        try {
+            if (!Base.hasConnection()) {
+                Base.open("org.sqlite.JDBC", "jdbc:sqlite:meu_app.db", "", "");
+            }
 
-    private Book findById(Long id) {
-        return listLivros.stream()
-                .filter(l -> l.getId() != null && l.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+            Book book = Car.findById(id);
+            if (book != null) {
+                book.delete();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (Base.hasConnection()) {
+                Base.close();
+            }
+        }
+
+        return "redirect:/livros/index";
     }
 }
