@@ -8,22 +8,21 @@
 </head>
 <body>
 <div class="container pt-3">
-    <a th:href="@{'/livros/index'}" class="btn btn-primary float-end">Voltar</a>
-    <h1> Editar Livro (<span th:text="${livro.getTitulo()}"></span>)</h1>
+    <a th:href="@{'/books/index'}" class="btn btn-primary float-end">Voltar</a>
+    <h1>Novo Livro</h1>
     <hr>
-    <form method="post" th:action="@{|/livros/update/${livro.id}|}" th:object="${livro}">
-        <input th:if="${livro.id != null}" type="hidden" name="_method" value="put" />
+    <form method="post" th:action="@{/books/create}" th:object="${book}">
         <div class="mb-3">
-            <label for="titulo" class="form-label">Titulo</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" aria-describedby="emailHelp"  th:field="*{titulo}" >
+            <label for="title" class="form-label">Titulo</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" >
         </div>
         <div class="mb-3">
             <label for="autor" class="form-label">Autor</label>
-            <input type="text" class="form-control" id="autor" name="autor" aria-describedby="emailHelp"  th:field="*{autor}" >
+            <input type="text" class="form-control" id="autor" th:field="*{autor}" >
         </div>
         <div class="mb-3">
-            <label for="genero" class="form-label">Gênero</label>
-            <input type="text" class="form-control" id="genero" name="genero" aria-describedby="emailHelp"  th:field="*{genero}" >
+            <label for="genre" class="form-label">Gênero</label>
+            <input type="text" class="form-control" id="genre" th:field="*{genre}" >
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

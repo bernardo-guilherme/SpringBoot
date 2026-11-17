@@ -12,15 +12,15 @@ public class Book extends Model {
     }
 
     public String getAutor() {
-        return getString("Autor");
+        return getString("autor");
     }
 
-    public void setAutorl(String autor) {
+    public void setAutor(String autor) {
         set("autor", autor);
     }
 
     public String getGenre() {
-        return getString("arroba");
+        return getString("genre");
     }
 
     public void setGenre(String genre) {

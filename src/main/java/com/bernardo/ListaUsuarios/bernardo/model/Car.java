@@ -19,11 +19,11 @@ public class Car extends Model {
         set("model", model);
     }
 
-    public String getPrice() {
-        return getString("arroba");
+    public Double getPrice() {
+        return getDouble("price");
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         set("price", price);
     }
 }

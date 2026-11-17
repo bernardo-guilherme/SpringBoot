@@ -33,7 +33,7 @@ public class DataInitializer implements CommandLineRunner {
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "brand VARCHAR(56), " +
                     "model VARCHAR(56), " +
-                    "price INTEGER)";
+                    "price REAL)";
             Base.exec(sqlCreate);
 
             // A PARTIR DAQUI A LIGAÇÃO ESTÁ ABERTA E A TABELA EXISTE

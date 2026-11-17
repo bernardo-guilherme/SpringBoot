@@ -1,34 +1,35 @@
+
 <!doctype html>
 <html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Livros</title>
+    <title>Lista de Carros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 <div class="container pt-3">
-    <a th:href="@{'/livros/new'}" class="btn btn-primary float-end">Novo Livro</a>
-    <h1>Lista Livros (<span th:text="${size}">0</span>)</h1>
+    <a th:href="@{'/cars/new'}" class="btn btn-primary float-end">Novo Carro</a>
+    <h1>Lista Carros (<span th:text="${size}">0</span>)</h1>
     <hr>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Título</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Gênero</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Preço</th>
             <th scope="col">Ações</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${books}">
-            <th scope="row" th:text="${book.id}">1</th>
-            <td th:text="${book.title}">-</td>
-            <td th:text="${book.autor}">-</td>
-            <td th:text="${book.genre}">-</td>
+        <tr th:each="car : ${cars}">
+            <td style="padding: 8px;" th:text="${car.id}">1</td>
+            <td style="padding: 8px;" th:text="${car.brand}">João</td>
+            <td style="padding: 8px;" th:text="${car.model}">@joao</td>
+            <td th:text="${#numbers.formatDecimal(car.price, 1, 'POINT', 2, 'COMMA')}">0,00</td>
             <td>
-                <a th:href="@{|/livros/show/${book.id}|}" class="btn btn-primary">Detalhes</a>
+                <a th:href="@{|/cars/show/${car.id}|}" class="btn btn-primary">Detalhes</a>
             </td>
         </tr>
         </tbody>

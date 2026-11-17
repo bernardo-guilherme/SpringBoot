@@ -13,34 +13,34 @@
 </head>
 <body>
 <div class="container pt-3">
-    <a th:href="@{'/carros/index'}" class="btn btn-secondary float-end">Voltar para Lista</a>
+    <a th:href="@{'/cars/index'}" class="btn btn-secondary float-end">Voltar para Lista</a>
     <h1>Detalhes do Carro</h1>
     <hr>
 
     <div class="card mt-4" style="max-width: 600px;">
         <div class="card-header">
-            <strong>Carro #<span th:text="|${carro.marca} ${carro.modelo}|">1</span></strong>
+            <strong>Carro #<span th:text="|${car.brand} ${car.model}|">1</span></strong>
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <strong>Marca:</strong> <span th:text="${carro.marca}">Mark</span>
+                    <strong>Marca:</strong> <span th:text="${car.brand}">Mark</span>
                 </li>
                 <li class="list-group-item">
-                    <strong>Modelo:</strong> <span th:text="${carro.modelo}">Otto</span>
+                    <strong>Modelo:</strong> <span th:text="${car.model}">Otto</span>
                 </li>
                 <li class="list-group-item">
-                    <strong>Preço:</strong> <span th:text="|${carro.preco} R$|">999.999,00</span>
+                    <strong>Preço:</strong> <span th:text="|R$ ${#numbers.formatDecimal(car.price, 1, 'POINT', 2, 'COMMA')}|">R$ 999.999,00</span>
                 </li>
             </ul>
         </div>
         <div class="card-footer d-flex gap-2">
             <!-- Botão de Editar -->
-            <a th:href="@{|/carros/edit/${carro.id}|}" class="btn btn-primary">
+            <a th:href="@{|/cars/edit/${car.id}|}" class="btn btn-primary">
                 <i class="bi bi-pencil"></i> Editar
             </a>
 
-            <form th:action="@{|/carros/delete/${carro.id}|}" method="post" class="m-0">
+            <form th:action="@{|/cars/delete/${car.id}|}" method="post" class="m-0">
                 <button type="submit" class="btn btn-danger">
                     <i class="bi bi-trash"></i> Excluir
                 </button>

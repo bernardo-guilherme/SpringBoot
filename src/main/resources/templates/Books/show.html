@@ -13,34 +13,34 @@
 </head>
 <body>
 <div class="container pt-3">
-    <a th:href="@{'/livros/index'}" class="btn btn-secondary float-end">Voltar para Lista</a>
+    <a th:href="@{'/books/index'}" class="btn btn-secondary float-end">Voltar para Lista</a>
     <h1>Detalhes do Livro</h1>
     <hr>
 
     <div class="card mt-4" style="max-width: 600px;">
         <div class="card-header">
-            <strong>Livro #<span th:text="${livro.id}">1</span></strong>
+            <strong>Livro #<span th:text="${book.id}">1</span></strong>
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <strong>Titulo:</strong> <span th:text="${livro.titulo}">Titulo Gênerico</span>
+                    <strong>Titulo:</strong> <span th:text="${book.title}">Titulo Gênerico</span>
                 </li>
                 <li class="list-group-item">
-                    <strong>Autor:</strong> <span th:text="${livro.autor}">Autor Qualquer</span>
+                    <strong>Autor:</strong> <span th:text="${book.autor}">Autor Qualquer</span>
                 </li>
                 <li class="list-group-item">
-                    <strong>Gênero:</strong> <span th:text="${livro.genero}">Romance</span>
+                    <strong>Gênero:</strong> <span th:text="${book.genre}">Romance</span>
                 </li>
             </ul>
         </div>
         <div class="card-footer d-flex gap-2">
             <!-- Botão de Editar -->
-            <a th:href="@{|/livros/edit/${livro.id}|}" class="btn btn-primary">
+            <a th:href="@{|/books/edit/${book.id}|}" class="btn btn-primary">
                 <i class="bi bi-pencil"></i> Editar
             </a>
 
-            <form th:action="@{|/livros/delete/${livro.id}|}" method="post" class="m-0">
+            <form th:action="@{|/books/delete/${book.id}|}" method="post" class="m-0">
                 <button type="submit" class="btn btn-danger">
                     <i class="bi bi-trash"></i> Excluir
                 </button>
